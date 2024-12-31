@@ -1,0 +1,102 @@
+{% load static wagtailcore_tags wagtailuserbar django_vite %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+      {% endblock title %}
+      {% block title_suffix %}
+      {% wagtail_site as current_site %}
+      {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+      {% endblock title_suffix %}
+    </title>
+    {% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}" />
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+    <base target="_blank">
+    {% endif %}
+
+    {# Global stylesheets #}
+    <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
+    {% vite_hmr_client %}
+    {% vite_asset 'css/main.css' %}
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock extra_css %}
+    {% url 'products:cart-update' as cart_update_url %}
+    {% url 'products:cart-delete' as cart_delete_url %}
+    {{ cart_update_url|json_script:'cart-update-url' }}
+    {{ cart_delete_url|json_script:'cart-delete-url' }}
+  </head>
+  <body class="{% block body_class %}{% endblock body_class %}">
+    {% wagtailuserbar %}
+    <nav class="flex flex-col items-center min-w-full gap-4 p-4 bg-red-600 lg:flex-row">
+      <a href="/"><img class="w-52" src="{% static "img/logo_horizontal.svg" %}" alt="logo wb horizontal"/></a>
+      <ul class="flex items-center justify-center gap-4 text-sm font-semibold text-white grow">
+        <li>
+          <a href="/acerca-de/" class="p-2">ACERCA DE</a>
+        </li>
+        <li>
+          <a href="{% url "products:products" %}" class="p-2">CATÁLOGO</a>
+        </li>
+        <li>
+          <a href="/contacto/" class="p-2">CONTACTO</a>
+        </li>
+        <li>
+        </li>
+      </ul>
+
+      <a href="{% url "products:cart" %}" class="relative" x-data="cart" @cart:remove.document="remove" @cart:update.document="update">
+        <i class="text-4xl text-white las la-shopping-cart"></i>
+        <span class="absolute flex items-center justify-center h-5 p-1 text-xs bg-white rounded-full min-w-5 -top-1 -right-3" x-show="total" x-text="total"></span>
+      </a>
+    </nav>
+    {% block hero %}{% endblock hero %}
+    {% block content %}{% endblock content %}
+    <footer class="w-full px-6 py-10 bg-red-600 lg:px-8">
+      <ul class="flex items-center justify-center gap-4 mb-6 text-sm font-semibold text-white">
+        <li>
+          <a href="/acerca-de/" class="p-2">ACERCA DE</a>
+        </li>
+        <li>
+          <a href="{% url "products:products" %}" class="p-2">CATÁLOGO</a>
+        </li>
+        <li>
+          <a href="/contacto/" class="p-2">CONTACTO</a>
+        </li>
+        <li>
+        </li>
+      </ul>
+      <ul class="flex items-center justify-center gap-4 mb-6 text-white">
+        <li>
+          <i class="text-4xl lab la-facebook"></i>
+        </li>
+        <li>
+          <i class="text-4xl lab la-instagram"></i>
+        </li>
+        <li>
+          <i class="text-4xl lab la-twitter"></i>
+        </li>
+        <li>
+          <i class="text-4xl lab la-youtube"></i>
+        </li>
+      </ul>
+      <p class="text-base leading-6 text-center text-gray-100">
+        © {% now 'Y' %} Industrias Willy Busch. Todos los derechos reservados.
+      </p>
+    </footer>
+    {# Global javascript #}
+    {% vite_asset 'js/main.js' %}
+    {% block extra_js %}
+      {# Override this in templates to add extra javascript #}
+    {% endblock extra_js %}
+  </body>
+</html>

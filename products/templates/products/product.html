@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+  <section class="container max-w-6xl px-4 py-10 mx-auto">
+		<div class="flex flex-col items-center gap-4 md:flex-row md:items-start">
+			<img data-code="{{ object.codigo }}" class="hidden object-contain w-full rounded md:w-1/2 lg:w-125" src="" alt="{{ object.codigo }} imagen">
+			<div class="flex flex-col w-full gap-4 md:w-1/2">
+				<h1 class="text-4xl font-extrabold text-center text-red-600 md:text-left">{{ object.codigo }}</h1>
+				<p class="font-semibold">{{ object.tipo }}</p>
+        <p class="font-semibold">Aplicación: {{ object.aplicaciones }}</p>
+				<form x-data="{count: 1}" class="flex add-to-cart">
+					{% csrf_token %}
+					<input type="hidden" name="code" value="{{ object.codigo }}">
+					<input type="hidden" name="desc" value="{{ object.tipo }}">
+					<button @click="count += 1" class="text-white bg-gray-500 rounded-l-lg w-11 h-11" type="button"><i class="las la-plus"></i></button>
+					<input class="w-20 text-center border-l-0 border-r-0 border-gray-200 h-11" type="text" name="count" x-model.number="count" />
+					<button :disabled="count <= 1" @click="count -= 1" class="text-white bg-gray-500 w-11 h-11 disabled:bg-gray-200" type="button"><i class="las la-minus"></i></button>
+					<button type="submit" class="px-4 py-2 text-lg font-semibold text-white bg-red-600 rounded-r-lg hover:bg-red-700 agregar-carrito">Agregar a lista</button>
+				</form>
+			</div>
+		</div>
+	</section>
+  <section class="container max-w-6xl px-4 py-10 mx-auto">
+    <div class="overflow-x-auto">
+      <table class="min-w-full">
+        <thead class="bg-white">
+          <tr>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Diametro interior
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Diametro exterior
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Altura
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              V. Anti
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              By pass
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Empaquetadura
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Unidades por caja
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-gray-100">
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {{ object.diametro_interior }}
+            </td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {{ object.diametro_exterior }}
+            </td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {% if object.altura %}{{ object.altura }}{% endif %}
+            </td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {{ object.valv_antidr }}
+            </td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {{ object.valv_by_pass }}
+            </td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {{ object.empaquetadura }}
+            </td>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+              {% if object.pzs_x_caja %}{{ object.pzs_x_caja }}{% endif %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="container max-w-6xl px-4 py-10 mx-auto">
+    <h4 class="mb-4 text-xl font-semibold">Modelos compatibles</h4>
+    <div class="overflow-x-auto">
+      <table class="min-w-full">
+        <thead class="bg-white">
+          <tr>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Marca
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Modelo
+            </th>
+            <th class="px-6 py-4 text-sm font-semibold text-left whitespace-nowrap">
+              Año
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pm in producto_modelos %}
+            <tr class="{% if forloop.counter0|divisibleby:2 %}bg-gray-100{% else %}bg-white{% endif %}">
+              <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                {{ pm.modelo.marca.nombre }}
+              </td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                {{ pm.modelo.nombre }}
+              </td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                {{ pm.ano }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+{% endblock content %}

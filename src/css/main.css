@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+
+.noUi-connect {
+    @apply !bg-red-600
+}
+.noUi-target {
+    @apply !rounded-lg
+}
+
+.noUi-horizontal {
+    @apply !h-3
+}
+.noUi-horizontal .noUi-handle {
+    @apply !w-6 !h-6 !-top-2 !-right-3 !rounded-full before:hidden after:hidden
+}
+
+@tailwind utilities;
