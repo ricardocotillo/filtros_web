@@ -97,7 +97,7 @@ htmx.onLoad(function (target) {
 })
 
 Alpine.data('yearData', () => ({
-  open: false,
+  open: true,
   originalMin: null,
   originalMax: null,
   init() {
@@ -133,7 +133,7 @@ Alpine.data('yearData', () => ({
 }))
 
 Alpine.data('brandData', () => ({
-  open: false,
+  open: true,
   originalBrands: [],
   brands: [],
   selectedBrands: [],
@@ -161,7 +161,7 @@ Alpine.data('brandData', () => ({
 }))
 
 Alpine.data('modelData', () => ({
-  open: false,
+  open: true,
   originalModels: [],
   models: [],
   selectedModels: [],
@@ -279,6 +279,12 @@ Alpine.data('products', () => ({
     const count = Number(form.count.value)
     const event = new CustomEvent('cart:update', { detail: { code, count: count, desc, } })
     document.dispatchEvent(event)
+  },
+  handleFilter() {
+    const event = new CustomEvent('filter:open')
+    document.dispatchEvent(event)
+    const body = document.querySelector('body')
+    body.classList.add('overflow-hidden')
   },
   async reset() {
     const resetStartEvent = new CustomEvent('reset:start')
