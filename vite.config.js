@@ -20,13 +20,15 @@ module.exports = {
     assetsDir: '',
     manifest: 'manifest.json',
     emptyOutDir: true,
-    target: 'es2015',
+    target: 'es2017',
     rollupOptions: {
       input: {
         main: resolve('./src/js/main.js'),
       },
       output: {
-        chunkFileNames: undefined,
+        entryFileNames: 'js/[name].js',
+        chunkFileNames: '[ext]/[name].[ext]',
+        assetFileNames: '[ext]/[name].[ext]',
       },
     },
   },

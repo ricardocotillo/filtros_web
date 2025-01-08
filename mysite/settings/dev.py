@@ -19,6 +19,6 @@ except ImportError:
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": True
+        "dev_mode": False
     }
 }
