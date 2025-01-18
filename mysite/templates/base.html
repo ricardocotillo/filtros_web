@@ -26,12 +26,12 @@
     {# Global stylesheets #}
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
     <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
-    {% if settings.DEBUG %}
+    {% comment %} {% if settings.DEBUG %} {% endcomment %}
       {% vite_hmr_client %}
       {% vite_asset 'css/main.css' %}
-    {% else %}
+    {% comment %} {% else %}
       <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    {% endif %}
+    {% endif %} {% endcomment %}
     {% block extra_css %}
     {# Override this in templates to add extra stylesheets #}
     {% endblock extra_css %}
@@ -98,11 +98,11 @@
       </p>
     </footer>
     {# Global javascript #}
-    {% if settings.DEBUG %}
+    {% comment %} {% if settings.DEBUG %} {% endcomment %}
       {% vite_asset 'js/main.js' %}
-    {% else %}
+    {% comment %} {% else %}
       <script src="{% static 'js/main.js' %}" type="module"></script>
-    {% endif %}
+    {% endif %} {% endcomment %}
     {% block extra_js %}
       {# Override this in templates to add extra javascript #}
     {% endblock extra_js %}
