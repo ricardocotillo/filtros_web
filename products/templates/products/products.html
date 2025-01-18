@@ -82,9 +82,9 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col col-span-3 gap-4 lg:col-span-2" x-data="products">
+    <div class="flex flex-col col-span-3 gap-4 bg-no-repeat lg:col-span-2" style="background-image: url({% static 'img/sello.svg' %})" x-data="products">
       <div class="flex gap-2">
-        <button @click="handleFilter" class="flex items-center justify-center w-12 h-12 text-3xl text-gray-800 bg-gray-200 rounded"><i class="las la-filter"></i></button>
+        <button @click="handleFilter" class="flex items-center justify-center w-12 h-12 text-3xl text-gray-800 bg-gray-200 rounded md:hidden"><i class="las la-filter"></i></button>
         <template x-if="Object.keys(params).length">
           <div class="flex gap-2">
             <button @click="clearFilters" class="px-4 py-2 text-gray-900 bg-gray-200">Remover filtros</button>
@@ -95,7 +95,7 @@
         <ul class="flex flex-col gap-6 md:gap-4">
           <template x-for="producto in productos">
             <li class="flex flex-col items-start gap-4 md:flex-row" :data-code="producto.codigo">
-              <a :href="`/productos/${producto.id}/`" class="block rounded shrink-0 bg-slate-100 min-w-40 min-h-40">
+              <a :href="`/productos/${producto.id}/`" class="block w-full rounded md:w-40 shrink-0 bg-slate-100 md:min-w-40 md:min-h-40 aspect-square md:aspect-auto">
                 <img :data-code="producto.codigo" class="hidden object-contain w-full border rounded md:aspect-auto aspect-square md:w-40 md:h-40" src="" :alt="`${producto.codigo} imagen`"/>
               </a>
               <div class="flex flex-col w-full gap-2 grow">
