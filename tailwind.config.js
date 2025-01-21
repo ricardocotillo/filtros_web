@@ -8,6 +8,11 @@ module.exports = {
     extend: {
       spacing: {
         125: '31.25rem',
+      },
+      fontFamily: {
+        sans: ['Avenir', 'ui-sans-serif', 'system-ui',],
+        avenir: ['Avenir',],
+        helvetica: ['Helvetica Neue',],
       }
     },
   },
