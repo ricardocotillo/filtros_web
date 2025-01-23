@@ -1,6 +1,7 @@
-from django.db import models
 from wagtail.admin.panels.field_panel import FieldPanel
 from wagtail.snippets.models import register_snippet
+from wagtail.search import index
+from django.db import models
 
 
 @register_snippet
@@ -25,7 +26,7 @@ class Modelo(models.Model):
 
 
 @register_snippet
-class Producto(models.Model):
+class Producto(index.Indexed, models.Model):
     class Valv(models.TextChoices):
         SI = 'si', 'SI'
         NO = 'no', 'NO'
@@ -75,6 +76,11 @@ class Producto(models.Model):
         FieldPanel('valv_by_pass'),
         FieldPanel('destacado'),
         FieldPanel('promocion'),
+    ]
+
+    search_fields = [
+        index.SearchField('codigo'),
+        index.AutocompleteField('codigo'),
     ]
 
     def __str__(self) -> str:
