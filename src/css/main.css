@@ -361,6 +361,15 @@
     font-style: normal;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply !font-helvetica italic;
+}
+
 .noUi-connect {
     @apply !bg-red-600
 }

@@ -121,7 +121,7 @@
             <div class="w-80 h-80">
               <img data-code="{{ product.codigo }}" class="hidden object-contain w-80 h-80" src="" alt="{{ product.codigo }} imagen" />
             </div>
-            <a href="{% url 'products:product' product.pk %}" class="block px-4 py-2 text-2xl font-extrabold text-center text-white bg-red-600 rounded-md">{{ product.codigo }}</a>
+            <a href="{% url 'products:product' product.pk %}" class="block px-4 py-2 text-2xl italic font-extrabold text-center text-white bg-red-600 rounded-md font-helvetica">{{ product.codigo }}</a>
             <p class="w-full font-semibold text-center text-gray-500 line-clamp-2">{{ product.tipo }}</p>
           </li>
           {% endfor %}
@@ -131,7 +131,7 @@
   </section>
   <section class="flex items-center justify-center text-white bg-fixed bg-cover h-125" style="background-image: url({% static 'home/img/paralelaje.webp' %})">
     {% comment %} <h1 class="text-6xl font-bold">Perfección que filtra</h1> {% endcomment %}
-    <img src="{% static 'img/sello.svg' %}" alt="sello willy busch">
+    <img class="w-125" src="{% static 'img/sello.svg' %}" alt="sello willy busch">
   </section>
   <section class="container px-4 py-10 mx-auto">
     <div class="flex flex-col items-start justify-between lg:flex-row lg:items-center">
@@ -144,7 +144,7 @@
           {% for product in promoted_products %}
           <li data-code="{{ product.codigo }}" class="flex flex-col items-center w-full gap-2 splide__slide">
             <img data-code="{{ product.codigo }}" class="hidden object-contain w-80 h-80" src="" alt="{{ product.codigo }} imagen" />
-            <a href="{% url 'products:product' product.pk %}" class="block w-5/6 px-4 py-2 text-2xl font-extrabold text-center text-white bg-red-600 rounded-md">{{ product.codigo }}</a>
+            <a href="{% url 'products:product' product.pk %}" class="block w-5/6 px-4 py-2 text-2xl italic font-extrabold text-center text-white bg-red-600 rounded-md font-helvetica">{{ product.codigo }}</a>
             <p class="w-full font-semibold text-center text-gray-500 line-clamp-2">{{ product.tipo }}</p>
           </li>
           {% endfor %}
