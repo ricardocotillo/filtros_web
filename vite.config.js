@@ -27,7 +27,9 @@ module.exports = {
       output: {
         entryFileNames: 'js/[name].js',
         chunkFileNames: '[ext]/[name].[ext]',
-        assetFileNames: '[ext]/[name].[ext]',
+        assetFileNames: asset => {
+          return asset.name == 'main.css' ? '[ext]/[name].[ext]' : asset.originalFileName
+        },
       },
     },
   },
