@@ -19,14 +19,54 @@
         </div>
       </div>
     </section>
-    <section class="container mx-auto">
-      <div class="flex flex-col-reverse gap-8 px-6 py-10 lg:flex-row lg:px-8">
+    <section class="flex flex-col px-6 py-32 text-white bg-gray-900 lg:py-10 lg:px-8">
+      <div class="grid w-full max-w-6xl grid-cols-1 mx-auto gap-x-8 gap-y-10 md:grid-cols-3">
+        <div>
+          <h2 class="mb-4 text-4xl font-bold font-helvetica">Objetivos de Calidad</h4>
+          <ul class="flex flex-col gap-2 pl-4 text-xl list-disc">
+            <li>Satisfacer los requisitos de nuestros clientes.</li>
+            <li>Mejorar nuestros indicadores de procesos</li>
+            <li>Aumentar la variedad de nuestros productos</li>
+            <li>Fomentar la competencia de nuestro personal</li>
+          </ul>
+        </div>
+        <img class="mx-auto w-80" src="{% static 'img/sello-mini.svg' %}" alt="sello de calidad willy busch">
+        <div>
+          <h2 class="mb-4 text-4xl font-bold font-helvetica">Nuestros Valores</h2>
+          <ul class="flex flex-col gap-2 pl-4 text-xl list-disc">
+            <li>Trabajo en equipo.</li>
+            <li>Colaboración.</li>
+            <li>Disciplina.	</li>
+            <li>Orden.</li>
+            <li>Honestidad.</li>
+            <li>Eficiencia.</li>
+            <li>Respeto.</li>
+            <li>Fe.</li>
+          </ul>
+        </div>
+        <div class="col-span-1 text-left lg:text-center lg:col-span-3">
+          <h2 class="mb-4 text-4xl font-bold font-helvetica">Políticas de calidad</h2>
+          <p class="text-xl">En Industrias Willy Busch S.A. buscamos la mejora continua de nuestro sistema de  gestión de la calidad, y es nuestro compromiso satisfacer los requisitos de nuestros clientes ofreciendo calidad y variedad en nuestros productos y servicios.</p>
+        </div>
+      </div>
+    </section>
+    <section class="bg-fixed bg-center bg-no-repeat bg-cover py-60" style="background-image: url({% static 'about/img/trailer.jpg' %})"></section>
+    <section class="container px-6 py-20 mx-auto lg:px-8">
+      <div class="flex flex-col-reverse gap-8 lg:flex-row">
         <img class="object-cover w-full bg-right aspect-video lg:w-125 rounded-xl shrink-0" src="{% static "about/img/camioneta-2.jpg" %}" alt="camioneta y filtro"/>
         <div>
           <h1 class="mb-6 text-5xl font-bold text-gray-900">Nuestra misión</h1>
-          <p class="text-lg font-medium text-gray-600 lg:text-xl">es ser líderes en la fabricación de sistemas de filtración automotriz, proporcionando soluciones innovadoras y de alta calidad que protejan y optimicen el desempeño de motores.</p>
-          <p class="text-lg font-medium text-gray-600 lg:text-xl">En Industrias Willy Busch nos enfocamos en cuidar cada detalle para prolongar la vida útil de los motores pesados o livianos, impulsando la confianza de nuestros clientes y contribuyendo al desarrollo de un sector más eficiente y sostenible.</p>
+          <p class="text-lg font-medium text-gray-600 lg:text-xl">Fabricar y comercializar filtros automotrices e industriales protegiendo máquinas y equipos para satisfacción de los requisitos de nuestros clientes, potenciando el valor de la empresa en base al mejoramiento continuo contando con el compromiso de sus colaboradores y contribuyendo con el bienestar de nuestra Sociedad.</p>
         </div>
+      </div>
+    </section>
+    <section class="px-6 py-20 text-white bg-gray-900 lg:px-8">
+      <div class="container flex flex-col gap-8 mx-auto lg:flex-row">
+        <div>
+          <h1 class="mb-6 text-5xl font-bold">Nuestra visión</h1>
+          <p class="text-lg font-medium lg:text-xl">Es convertirnos en una empresa líder en la fabricación y comercialización de filtros en el mercado nacional brindando la opción más confiable en base a filtros de calidad.</p>
+        </div>
+        <img class="object-cover w-full bg-right aspect-video lg:w-125 rounded-xl shrink-0" src="{% static "about/img/trailer.jpg" %}" alt="trailer y filtros"/>
       </div>
     </section>
   </main>
