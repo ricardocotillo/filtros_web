@@ -51,7 +51,7 @@ class ProductsView(View):
             Producto.objects.values_list('tipo', flat=True).distinct()
         )
         ctx = {
-            'lines': lines,
+            'lines': [],
             'filters': filt.data,
             'products': ProductoSerializer(page.object_list, many=True).data,
             'next': '/productos/productos/?page=2'
