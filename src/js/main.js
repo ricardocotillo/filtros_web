@@ -383,3 +383,21 @@ Alpine.data('products', () => ({
   },
 }))
 Alpine.start()
+
+const imgContainers = document.querySelectorAll('.image-container')
+
+imgContainers.forEach(container => {
+  const img = container.querySelector('img')
+  container.addEventListener('mousemove', (e) => {
+    const { left, top, width, height } = container.getBoundingClientRect();
+    const x = (e.clientX - left) / width * 100
+    const y = (e.clientY - top) / height * 100
+    img.style.transformOrigin = `${x}% ${y}%`
+    img.style.transform = 'scale(2)'
+  })
+
+  container.addEventListener('mouseleave', () => {
+    img.style.transform = 'scale(1)'
+    img.style.transformOrigin = 'center'
+  })
+})

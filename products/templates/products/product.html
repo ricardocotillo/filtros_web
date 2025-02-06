@@ -4,7 +4,9 @@
 <main>
   <section class="container max-w-6xl px-4 py-10 mx-auto">
 		<div class="flex flex-col items-center gap-4 md:flex-row md:items-start">
-			<img data-code="{{ object.codigo }}" class="hidden object-contain w-full rounded md:w-1/2 lg:w-125" src="" alt="{{ object.codigo }} imagen">
+      <div class="relative w-full overflow-hidden aspect-square md:w-96 image-container hover:cursor-zoom-in">
+        <img data-code="{{ object.codigo }}" class="hidden object-cover w-full h-full transition-transform" src="" alt="{{ object.codigo }} imagen">
+      </div>
 			<div class="flex flex-col w-full gap-4 md:w-1/2">
 				<h1 class="text-4xl font-extrabold text-center text-red-600 md:text-left">{{ object.codigo }}</h1>
 				<p class="font-semibold">{{ object.tipo }}</p>
