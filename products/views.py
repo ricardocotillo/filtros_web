@@ -47,7 +47,11 @@ class ProductsView(View):
         ).order_by('ano')
         year_min = years.first()
         year_max = years.last()
+        lines = list(
+            Producto.objects.values_list('tipo', flat=True).distinct()
+        )
         ctx = {
+            'lines': lines,
             'filters': filt.data,
             'products': ProductoSerializer(page.object_list, many=True).data,
             'next': '/productos/productos/?page=2'

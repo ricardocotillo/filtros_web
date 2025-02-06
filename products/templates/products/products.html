@@ -9,6 +9,7 @@
 {{ year_max|json_script:'year-max' }}
 {{ next|json_script:'next' }}
 {{ filters|json_script:'filters' }}
+{{ lines|json_script:'lines' }}
 {% endblock extra_css %}
 
 <main>
@@ -44,7 +45,22 @@
               <div x-ref="range"></div>
             </div>
           </div>
-          <div x-data="brandData" class="border-t border-gray-400 border-x ">
+          <div x-data="lineData" class="border-t border-gray-400 border-x">
+            <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Línea <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
+            <div x-show="open" x-transition class="pt-2 bg-white">
+              <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
+                <template x-for="line in lines">
+                  <li>
+                    <label class="flex items-center w-full gap-2" :for="line">
+                      <input class="rounded" :id="line" @change="dispatch" type="checkbox" :value="line" x-model="selectedLines">
+                      <span x-text="line"></span>
+                    </label>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
+          <div x-data="brandData" class="border-t border-gray-400 border-x">
             <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Marca <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">
               <div class="px-2 mb-2">
@@ -53,7 +69,7 @@
               <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
                 <template x-for="brand in brands">
                   <li>
-                    <label class="flex items-center gap-2" :for="`brand-${brand.id}`" class="w-full">
+                    <label class="flex items-center w-full gap-2" :for="`brand-${brand.id}`">
                       <input class="rounded" :id="`brand-${brand.id}`" @change="dispatch" type="checkbox" :value="brand.id" x-model="selectedBrands">
                       <span x-text="brand.nombre"></span>
                     </label>
@@ -71,7 +87,7 @@
               <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
                 <template x-for="model in models">
                   <li>
-                    <label class="flex items-center gap-2" :for="`model-${model.id}`" class="w-full">
+                    <label class="flex items-center w-full gap-2" :for="`model-${model.id}`">
                       <input class="rounded" :id="`model-${model.id}`" @change="dispatch" type="checkbox" :value="model.id" x-model="selectedModels">
                       <span x-text="model.nombre"></span>
                     </label>

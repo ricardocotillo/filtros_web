@@ -1,7 +1,7 @@
 from django_filters import FilterSet, CharFilter
 from django_filters.rest_framework import FilterSet as RestFilterSet
 from django.db import models
-from utils.filters import NumberRangeFilter, NumberInFilter
+from utils.filters import NumberRangeFilter, NumberInFilter, CharInFilter
 from .models import Producto, Modelo, Marca
 
 
@@ -52,6 +52,10 @@ class ProductoRestFilterSet(RestFilterSet):
         field_name='producto_modelos__modelo',
         lookup_expr='in',
     )
+    tipo__in = CharInFilter(
+        field_name='tipo',
+        lookup_expr='in',
+    )
 
     class Meta:
         model = Producto
@@ -63,7 +67,8 @@ class ProductoRestFilterSet(RestFilterSet):
             'equivalencias__codigo_alt': ('iexact', 'icontains'),
             'producto_modelos__ano': ('exact', 'range'),
             'producto_modelos__modelo': ('exact', 'in',),
-            'producto_modelos__modelo__marca': ('exact', 'in')
+            'producto_modelos__modelo__marca': ('exact', 'in'),
+            'tipo': ('exact', 'in'),
         }
         filter_overrides = {
             models.GeneratedField: {

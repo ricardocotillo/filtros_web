@@ -132,6 +132,26 @@ Alpine.data('yearData', () => ({
   }
 }))
 
+Alpine.data('lineData', () => ({
+  open: true,
+  originalLines: [],
+  lines: [],
+  selectedLines: [],
+  query: '',
+  init() {
+    const b = JSON.parse(document.querySelector('#lines').textContent)
+    this.lines = b
+    this.originalLines = b
+    document.addEventListener('filter:clear', () => {
+      this.selectedLines = []
+    })
+  },
+  dispatch() {
+    const event = new CustomEvent('filter:lines', { detail: { lines: this.selectedLines } })
+    document.dispatchEvent(event)
+  },
+}))
+
 Alpine.data('brandData', () => ({
   open: true,
   originalBrands: [],
@@ -337,6 +357,11 @@ Alpine.data('products', () => ({
     document.addEventListener('filter:year', async e => {
       const { min, max } = e.detail
       this.params['producto_modelos__ano__range'] = `${min},${max}`
+      this.reset()
+    })
+    document.addEventListener('filter:lines', e => {
+      const { lines } = e.detail
+      this.params['tipo__in'] = lines.join(',')
       this.reset()
     })
     document.addEventListener('filter:brands', e => {
