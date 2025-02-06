@@ -2,6 +2,8 @@ from wagtail.admin.panels.field_panel import FieldPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
 from django.db import models
+from django.db.models import F
+from .functions import RemoveHyphens
 
 
 @register_snippet
@@ -31,6 +33,11 @@ class Producto(index.Indexed, models.Model):
         SI = 'si', 'SI'
         NO = 'no', 'NO'
     codigo = models.CharField(max_length=25, unique=True)
+    codigo_alt = models.GeneratedField(
+        expression=RemoveHyphens(F('codigo')),
+        output_field=models.CharField(max_length=25),
+        db_persist=True  # Persist in DB
+    )
     linea = models.CharField(max_length=25, blank=True)
     tipo = models.CharField(max_length=50, blank=True)
     modelos = models.ManyToManyField(
@@ -118,6 +125,11 @@ class ProductoModelo(models.Model):
 @register_snippet
 class Equivalencia(models.Model):
     codigo = models.CharField(max_length=50)
+    codigo_alt = models.GeneratedField(
+        expression=RemoveHyphens(F('codigo')),
+        output_field=models.CharField(max_length=50),
+        db_persist=True  # Persist in DB
+    )
     marca = models.CharField(max_length=25)
     producto = models.ForeignKey(
         Producto,

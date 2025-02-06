@@ -58,7 +58,7 @@
       <div x-show="mode == 'code'" id="q-code">
         <form action="{% url "products:products" %}" id="search-form" hx-get="{% url "products:search" %}" hx-trigger="search-input" hx-target="#searchSuggestions">
           <input
-            name="codigo__icontains"
+            name="codigo_alt__icontains"
             x-model="query"
             placeholder="Ingresa código a buscar"
             type="search"
@@ -70,7 +70,7 @@
       <div x-show="mode == 'eq'" id="q-eq">
         <form action="{% url "products:products" %}" id="eq-form" hx-get="{% url "products:search" %}" hx-trigger="search-input" hx-target="#searchSuggestions">
           <input
-            name="equivalencias__codigo__icontains"
+            name="equivalencias__codigo_alt__icontains"
             placeholder="Ingresa código a comparar"
             x-model="query"
             type="search"

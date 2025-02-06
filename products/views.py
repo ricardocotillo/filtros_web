@@ -28,6 +28,7 @@ class ProductSearchListView(ListView):
 
     def get_queryset(self) -> QuerySet[Producto]:
         qs = super().get_queryset()
+        print(self.request.GET)
         filt = ProductoFilterSet(self.request.GET, qs)
         return filt.qs.distinct()
 
