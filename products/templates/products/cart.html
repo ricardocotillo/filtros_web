@@ -7,7 +7,8 @@
         <div class="md:col-span-1">
           <h4 class="mb-4 text-xl font-semibold">¿Deseas solicitar una cotización?</h4>
           <p class="mb-4 text-gray-900">Comunicate con nosotros. Enviaremos tu pedido a uno de nuestros representantes de venta y el te responderá lo más rápido posible</p>
-          <a :href="`https://wa.me/51970001095?text=${text}`" class="flex items-center justify-center gap-2 px-4 py-2 text-white bg-red-600"><i class="text-2xl lab la-whatsapp"></i> Solicitar cotización</a>
+          {% comment %} <a :href="`https://wa.me/51970001095?text=${text}`" class="flex items-center justify-center gap-2 px-4 py-2 text-white bg-red-600"><i class="text-2xl lab la-whatsapp"></i> Solicitar cotización</a> {% endcomment %}
+          <a :href="`mailto:atencionalcliente@filtroswillybusch.com.pe?subject=${encodeURIComponent('Solicitud de cotización')}&body=${text}`" class="flex items-center justify-center gap-2 px-4 py-2 text-white bg-red-600"><i class="text-2xl las la-envelope"></i> Solicitar cotización</a>
         </div>
         <ul class="md:col-span-2">
           <template x-for="(item, i) in cart">
