@@ -4,7 +4,7 @@ from .views import (
     ProductSearchListView, ProductsView,
     ProductView, CartTemplateView, CartUpdateView,
     CartDeleteView, ProductoViewSet, MarcaViewSet,
-    ModeloViewSet, ProductoModeloViewSet,
+    ModeloViewSet, ProductoModeloViewSet, LineView,
 )
 
 app_name = 'products'
@@ -21,5 +21,6 @@ urlpatterns = [
     path('cart/update/', CartUpdateView.as_view(), name='cart-update'),
     path('cart/delete/', CartDeleteView.as_view(), name='cart-delete'),
     path('<int:pk>/', ProductView.as_view(), name='product'),
+    path('line/<str:slug>/', LineView.as_view(), name='line'),
     path('', ProductsView.as_view(), name='products',),
 ] + router.urls

@@ -45,7 +45,7 @@
               <div x-ref="range"></div>
             </div>
           </div>
-          <div x-data="lineData" class="border-t border-gray-400 border-x">
+          {% comment %} <div x-data="lineData" class="border-t border-gray-400 border-x">
             <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Línea <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">
               <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
@@ -59,7 +59,7 @@
                 </template>
               </ul>
             </div>
-          </div>
+          </div> {% endcomment %}
           <div x-data="brandData" class="border-t border-gray-400 border-x">
             <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Marca <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">

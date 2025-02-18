@@ -33,6 +33,12 @@ class ProductSearchListView(ListView):
         return filt.qs.distinct()
 
 
+class LineView(View):
+    def get(self, request: HttpRequest, *args, **kwargs):
+        slug = kwargs.get('slug')
+        return render(request, f'products/line_{slug}.html')
+
+
 class ProductsView(View):
     def get(self, request: HttpRequest, *args, **kwargs):
         products = Producto.objects.order_by('codigo')
