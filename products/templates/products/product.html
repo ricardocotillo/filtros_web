@@ -11,7 +11,7 @@
 				<h1 class="text-4xl font-extrabold text-center text-red-600 md:text-left">{{ object.codigo }}</h1>
 				<p class="font-semibold">{{ object.tipo }}</p>
         <p class="font-semibold">Aplicación: {{ object.aplicaciones }}</p>
-				<form x-data="{count: 1}" class="flex add-to-cart">
+				<form @submit.prevent="addToCart" x-data="product" class="flex add-to-cart">
 					{% csrf_token %}
 					<input type="hidden" name="code" value="{{ object.codigo }}">
 					<input type="hidden" name="desc" value="{{ object.tipo }}">

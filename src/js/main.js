@@ -282,6 +282,18 @@ Alpine.data('cart', () => ({
   }
 }))
 
+Alpine.data('product', () => ({
+  count: 1,
+  addToCart(e) {
+    const form = e.target
+    const code = form.code.value
+    const desc = form.desc.value
+    const count = Number(form.count.value)
+    const event = new CustomEvent('cart:update', { detail: { code, count: count, desc, } })
+    document.dispatchEvent(event)
+  }
+}))
+
 Alpine.data('products', () => ({
   previous: null,
   next: null,
