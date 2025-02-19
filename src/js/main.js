@@ -221,6 +221,12 @@ Alpine.data('fullCartData', () => ({
       this.cart = JSON.parse(cartStorage)
     }
   },
+  get total() {
+    return Object.values(this.cart).map(item => item.count).reduce((a, v) => a + v)
+  },
+  get totalFormatted() {
+    return `(${this.total} items)`
+  },
   encodeCart() {
     if (!this.cart) {
       this.text = ''
