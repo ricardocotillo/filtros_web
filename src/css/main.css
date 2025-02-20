@@ -385,5 +385,8 @@ h6 {
 .noUi-horizontal .noUi-handle {
     @apply !w-6 !h-6 !-top-2 !-right-3 !rounded-full before:hidden after:hidden
 }
+.x-cloak {
+    @apply hidden
+}
 
 @tailwind utilities;

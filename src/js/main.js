@@ -400,6 +400,25 @@ Alpine.data('products', () => ({
     document.dispatchEvent(event)
   },
 }))
+Alpine.data('contact', () => ({
+  sent: false,
+  success: false,
+  sendEmail(e) {
+  const form = e.target;
+  const formData = new FormData(form);
+  axios.post(form.action, formData)
+  .then(response => {
+    console.log(response)
+    this.sent = true;
+    this.success = response.data.success;
+  })
+  .catch(error => {
+    console.log(error)
+    this.sent = true;
+    this.success = false;
+  })
+}
+}))
 Alpine.start()
 
 const imgContainers = document.querySelectorAll('.image-container')
