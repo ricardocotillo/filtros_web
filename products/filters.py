@@ -24,18 +24,41 @@ class ProductoFilterSet(FilterSet):
 
 
 class ModeloRestFilterSet(RestFilterSet):
+    modelo_productos__ano__range = NumberRangeFilter(
+        field_name='modelo_productos__ano',
+        lookup_expr='range',
+    )
+
+    marca__in = NumberInFilter(
+        field_name='marca',
+        lookup_expr='in',
+    )
+
     class Meta:
         model = Modelo
         fields = {
-            'nombre': ('iexact', 'icontains',)
+            'nombre': ('iexact', 'icontains',),
+            'ano': ('exact', 'range',),
+            'marca': ('exact', 'in'),
         }
 
 
 class MarcaRestFilterSet(RestFilterSet):
+    modelos__modelo_productos__ano__range = NumberRangeFilter(
+        field_name='modelos__modelo_productos_ano',
+        lookup_expr='range',
+    )
+    modelos__in = NumberInFilter(
+        field_name='modelos',
+        lookup_expr='in',
+    )
+
     class Meta:
         model = Marca
         fields = {
-            'nombre': ('iexact', 'icontains',)
+            'nombre': ('iexact', 'icontains',),
+            'modelos__modelo_productos__ano': ('exact', 'range',),
+            'modelos': ('exact', 'in'),
         }
 
 
