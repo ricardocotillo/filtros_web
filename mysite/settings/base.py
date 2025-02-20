@@ -200,3 +200,10 @@ def immutable_file_test(path, url):
 
 
 WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
+
+EMAIL_HOST='filtroswillybusch.com.pe'
+EMAIL_USE_TLS=True
+EMAIL_PORT=465
+EMAIL_HOST_USER='atencionalcliente@filtroswillybusch.com.pe'
+EMAIL_HOST_PASSWORD='Qotn66!52!/=$'
+DEFAULT_FROM_EMAIL='atencionalcliente@filtroswillybusch.com.pe'
