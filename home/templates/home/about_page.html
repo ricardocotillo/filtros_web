@@ -3,19 +3,19 @@
 
 {% block content %}
   <main>
-    <section class="container flex flex-col py-10 mx-auto xl:flex-row xl:items-center">
-      <div class="w-full px-6 py-10 lg:px-8 xl:w-1/2">
+    <section class="container grid grid-cols-1 gap-10 py-10 mx-auto xl:grid-cols-2">
+      <div class="w-full col-span-1 px-6 py-10">
         <h1 class="mb-8 text-4xl font-extrabold text-gray-900 lg:text-7xl">Transformamos la manera de proteger tu motor</h1>
         <p class="text-lg font-medium text-gray-600 lg:text-xl">con filtros diseñados para maximizar el rendimiento y la durabilidad de cualquier vehículo. Ya sea aire, gasolina o aceite, cada filtro combina innovación y calidad para garantizar un motor más limpio y eficiente. Nuestra tecnología asegura que cada componente esté protegido, brindando confianza y potencia en cada trayecto. Confía en quienes cuidan lo esencial, confia en la perfección que filtra.</p>
       </div>
-      <div class="flex justify-center w-full gap-8 overflow-hidden xl:justify-end flex-nowrap xl:w-1/2">
+      <div class="flex justify-center w-full col-span-1 gap-8 overflow-hidden xl:justify-end flex-nowrap">
         <div class="pt-36 shrink-0">
-          <img class="rounded-xl w-72 h-72" src="{% static 'about/img/1.jpg' %}" alt="autos"/>
-          <img class="mt-8 rounded-xl h-72 w-72" src="{% static "about/img/2.jpg" %}" alt="camioneta"/>
+          <img class="rounded-xl w-36 h-36 md:w-64 md:h-64 xl:w-72 xl:h-72" src="{% static 'about/img/1.jpg' %}" alt="autos"/>
+          <img class="mt-8 rounded-xl w-36 h-36 md:w-64 md:h-64 xl:h-72 xl:w-72" src="{% static "about/img/2.jpg" %}" alt="camioneta"/>
         </div>
         <div class="pb-36 shrink-0">
-          <img class="rounded-xl w-72 h-72" src="{% static 'about/img/3.jpg' %}" alt="auto y camioneta"/>
-          <img class="mt-8 rounded-xl h-72 w-72" src="{% static 'about/img/4.jpg' %}" alt="camion"/>
+          <img class="rounded-xl w-36 h-36 md:w-64 md:h-64 xl:w-72 xl:h-72" src="{% static 'about/img/3.jpg' %}" alt="auto y camioneta"/>
+          <img class="mt-8 rounded-xl w-36 h-36 md:w-64 md:h-64 xl:h-72 xl:w-72" src="{% static 'about/img/4.jpg' %}" alt="camion"/>
         </div>
       </div>
     </section>
