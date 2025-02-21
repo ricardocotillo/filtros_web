@@ -197,5 +197,5 @@ EMAIL_HOST = 'filtroswillybusch.com.pe'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'atencionalcliente@filtroswillybusch.com.pe'
-EMAIL_HOST_PASSWORD = 'Qotn66!52!/=$'
+EMAIL_HOST_PASSWORD = 'W32*8o3qu!/*'
 DEFAULT_FROM_EMAIL = 'atencionalcliente@filtroswillybusch.com.pe'
