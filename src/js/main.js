@@ -166,6 +166,7 @@ Alpine.data('brandData', () => ({
     this.originalBrands = b
     document.addEventListener('filter:clear', () => {
       this.selectedBrands = []
+      this.brands = this.originalBrands
     })
 
     document.addEventListener('filter:year', ({ detail: { min, max } }) => {
@@ -211,6 +212,7 @@ Alpine.data('modelData', () => ({
     this.originalModels = m
     document.addEventListener('filter:clear', () => {
       this.selectedModels = []
+      this.models = this.originalModels
     })
 
     document.addEventListener('filter:year', ({ detail: { min, max } }) => {
