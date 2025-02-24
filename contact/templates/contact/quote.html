@@ -8,4 +8,8 @@
 <li>
 <br>
 <strong>Productos:</strong>
-<p>{{ message }}</p>
+<ol>
+  {% for product in products %}
+    <li>{{ product }}</li>
+  {% endfor %}
+</ol>

@@ -14,11 +14,15 @@ class QuoteView(View):
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
             ruc = form.cleaned_data['ruc']
+            message = form.cleaned_data['message']
+            products = message.split(',')
+
             html_msg = render_to_string('contact/quote.html', {
                 'full_name': full_name,
                 'email': email,
                 'phone': phone,
                 'ruc': ruc,
+                'products': products,
             })
             try:
                 send_mail(

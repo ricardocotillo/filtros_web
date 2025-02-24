@@ -287,9 +287,9 @@ Alpine.data('fullCartData', () => ({
       return
     }
     const items = Object.values(this.cart).map((v, i) => {
-      return `${i + 1}. ${v.code} cantidad: ${v.count}`
-    }).join('\n')
-    this.text = encodeURIComponent(`Solicito cotización de:\n${items}`)
+      return `${v.code} cantidad: ${v.count}`
+    }).join(',')
+    this.text = items
   },
   increase(code) {
     this.cart[code].count += 1
