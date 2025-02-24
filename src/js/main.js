@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (heroEl) {
     const splide = new Splide(heroEl, {
       type: 'loop',
+      pagination: false,
       autoplay: true,
     })
     splide?.mount()
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const featuredSplide = new Splide(el, {
       type: 'loop',
       perPage: 4,
+      pagination: false,
       gap: '.25rem',
       breakpoints: {
         640: {
