@@ -1,12 +1,42 @@
-from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.views.generic import View
+from django.http import HttpRequest
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from .forms import ContactForm
+from .forms import ContactForm, QuoteForm
+
+
+class QuoteView(View):
+    def post(self, request: HttpRequest) -> JsonResponse:
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            ruc = form.cleaned_data['ruc']
+            html_msg = render_to_string('contact/quote.html', {
+                'full_name': full_name,
+                'email': email,
+                'phone': phone,
+                'ruc': ruc,
+            })
+            try:
+                send_mail(
+                    subject='Cotización solicitada',
+                    message=html_msg,
+                    html_message=html_msg,
+                    from_email='atencionalcliente@filtroswillybusch.com.pe',
+                    recipient_list=[email],
+                )
+                return JsonResponse({'success': True})
+            except Exception as e:
+                return JsonResponse({'success': False, 'error': str(e)})
+
+        return JsonResponse({'success': False, 'errors': form.errors})
+
 
 class EmailView(View):
-    def post(self, request):
+    def post(self, request: HttpRequest) -> JsonResponse:
         form = ContactForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
@@ -26,7 +56,8 @@ class EmailView(View):
                     message='',
                     html_message=html_msg,
                     from_email='atencionalcliente@filtroswillybusch.com.pe',
-                    recipient_list=['atencionalcliente@filtroswillybusch.com.pe'],
+                    recipient_list=[
+                        'atencionalcliente@filtroswillybusch.com.pe'],
                     fail_silently=False,
                 )
             except Exception as e:
@@ -36,5 +67,3 @@ class EmailView(View):
         else:
             print(form.errors.as_json())
             return JsonResponse({'success': False, 'errors': form.errors})
-            
-            

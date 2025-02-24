@@ -267,6 +267,20 @@ Alpine.data('fullCartData', () => ({
   get totalFormatted() {
     return `(${this.total} items)`
   },
+  async requestQuote(e) {
+    const form = e.target
+    const formData = new FormData(form)
+    formData.set('message', this.text)
+    axios.post(form.action, formData)
+      .then(response => {
+        this.sent = true;
+        this.success = response.data.success;
+      })
+      .catch(error => {
+        this.sent = true;
+        this.success = false;
+      })
+  },
   encodeCart() {
     if (!this.cart) {
       this.text = ''
@@ -448,12 +462,10 @@ Alpine.data('contact', () => ({
     const formData = new FormData(form);
     axios.post(form.action, formData)
       .then(response => {
-        console.log(response)
         this.sent = true;
         this.success = response.data.success;
       })
       .catch(error => {
-        console.log(error)
         this.sent = true;
         this.success = false;
       })
