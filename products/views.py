@@ -27,10 +27,10 @@ class ProductSearchListView(ListView):
     ordering = ('codigo',)
 
     def get_queryset(self) -> QuerySet[Producto]:
-        qs = super().get_queryset()
-        print(self.request.GET)
-        filt = ProductoFilterSet(self.request.GET, qs)
-        return filt.qs.distinct()
+        return ProductoFilterSet(
+            self.request.GET,
+            super().get_queryset(),
+        ).qs.distinct()
 
 
 class LineView(View):

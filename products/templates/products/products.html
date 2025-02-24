@@ -20,8 +20,8 @@
   {% endblock hero %}
   {% block content %}
   <section class="container px-4 py-10 mx-auto">
-    <div x-data="{loading: false}" @reset:start.document="loading = true" @reset:end.document="loading = false" class="relative grid grid-cols-3 gap-8">
-      <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50" x-show="loading">
+    <div x-data="{loading: false}" @reset:start.document="loading = true" @reset:end.document="loading = false" class="grid relative grid-cols-3 gap-8">
+      <div class="flex absolute inset-0 justify-center items-center bg-white bg-opacity-50" x-show="loading">
       </div>
       <div
         x-data="{
@@ -33,25 +33,25 @@
           }
         }"
         @filter:open.document="open = true"
-        class="fixed top-0 w-full max-w-sm max-h-full min-w-full col-span-1 overflow-y-auto -translate-x-1/2 lg:translate-y-0 lg:block lg:static left-1/2 lg:translate-x-0"
+        class="overflow-y-auto fixed top-0 left-1/2 col-span-1 w-full min-w-full max-w-sm max-h-full -translate-x-1/2 lg:translate-y-0 lg:block lg:static lg:translate-x-0"
         :class="open ? '' : 'hidden'"
       >
         <div class="relative bg-gray-200 rounded-sm">
           <h2 class="p-4 text-3xl font-extrabold border-t border-gray-400 border-x">Limita tu búsqueda</h2>
-          <button @click="closeFilter" class="absolute p-2 text-3xl top-2 right-2 lg:hidden"><i class="las la-times"></i></button>
+          <button @click="closeFilter" class="absolute top-2 right-2 p-2 text-3xl lg:hidden"><i class="las la-times"></i></button>
           <div class="border-t border-gray-400 border-x" x-data="yearData">
-            <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Año <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
+            <button @click="open = !open" class="flex justify-between items-center px-4 py-2 w-full text-lg font-semibold">Año <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" class="px-6 pt-12 pb-4">
               <div x-ref="range"></div>
             </div>
           </div>
           {% comment %} <div x-data="lineData" class="border-t border-gray-400 border-x">
-            <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Línea <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
+            <button @click="open = !open" class="flex justify-between items-center px-4 py-2 w-full text-lg font-semibold">Línea <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">
               <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
                 <template x-for="line in lines">
                   <li>
-                    <label class="flex items-center w-full gap-2" :for="line">
+                    <label class="flex gap-2 items-center w-full" :for="line">
                       <input class="rounded" :id="line" @change="dispatch" type="checkbox" :value="line" x-model="selectedLines">
                       <span x-text="line"></span>
                     </label>
@@ -61,16 +61,16 @@
             </div>
           </div> {% endcomment %}
           <div x-data="brandData" class="border-t border-gray-400 border-x">
-            <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Marca <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
+            <button @click="open = !open" class="flex justify-between items-center px-4 py-2 w-full text-lg font-semibold">Marca <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">
               <div class="px-2 mb-2">
                 <input @input="search" x-model="query" type="text" class="w-full" placeholder="Busca más marcas...">
               </div>
               <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
-                <template x-for="brand in brands">
+                <template x-for="brand in brands" :key="brand.id">
                   <li>
-                    <label class="flex items-center w-full gap-2" :for="`brand-${brand.id}`">
-                      <input class="rounded" :id="`brand-${brand.id}`" @change="dispatch" type="checkbox" :value="brand.id" x-model="selectedBrands">
+                    <label class="flex gap-2 items-center w-full cursor-pointer" :for="`brand-${brand.id}`">
+                      <input class="rounded" :id="`brand-${brand.id}`" @change="dispatch" type="checkbox" :value="brand.id" x-model.number="selectedBrands">
                       <span x-text="brand.nombre"></span>
                     </label>
                   </li>
@@ -79,16 +79,16 @@
             </div>
           </div>
           <div x-data="modelData" class="border border-gray-400">
-            <button @click="open = !open" class="flex items-center justify-between w-full px-4 py-2 text-lg font-semibold">Modelo <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
+            <button @click="open = !open" class="flex justify-between items-center px-4 py-2 w-full text-lg font-semibold">Modelo <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">
               <div class="px-2 mb-2">
                 <input @input="search" x-model="query" type="text" class="w-full" placeholder="Busca más modelos...">
               </div>
               <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
-                <template x-for="model in models">
+                <template x-for="model in models" :key="model.id">
                   <li>
-                    <label class="flex items-center w-full gap-2" :for="`model-${model.id}`">
-                      <input class="rounded" :id="`model-${model.id}`" @change="dispatch" type="checkbox" :value="model.id" x-model="selectedModels">
+                    <label class="flex gap-2 items-center w-full cursor-pointer" :for="`model-${model.id}`">
+                      <input class="rounded" :id="`model-${model.id}`" @change="dispatch" type="checkbox" :value="model.id" x-model.number="selectedModels">
                       <span x-text="model.nombre"></span>
                     </label>
                   </li>
@@ -100,7 +100,7 @@
       </div>
       <div class="flex flex-col col-span-3 gap-4 bg-no-repeat lg:col-span-2" style="background-image: url({% static 'products/img/sello-agua.svg' %})" x-data="products">
         <div class="flex gap-2">
-          <button @click="handleFilter" class="flex items-center justify-center w-12 h-12 text-3xl text-gray-800 bg-gray-200 rounded md:hidden"><i class="las la-filter"></i></button>
+          <button @click="handleFilter" class="flex justify-center items-center w-12 h-12 text-3xl text-gray-800 bg-gray-200 rounded md:hidden"><i class="las la-filter"></i></button>
           <template x-if="Object.keys(params).length">
             <div class="flex gap-2">
               <button @click="clearFilters" class="px-4 py-2 text-sm text-gray-900 bg-gray-200">Quitar parámetros de búsqueda</button>
@@ -110,13 +110,13 @@
         <template x-if="productos.length">
           <ul class="flex flex-col gap-6 md:gap-4">
             <template x-for="producto in productos">
-              <li class="flex flex-col items-start gap-4 md:flex-row" :data-code="producto.codigo">
+              <li class="flex flex-col gap-4 items-start md:flex-row" :data-code="producto.codigo">
                 <a :href="`/productos/${producto.id}/`" class="block w-full rounded md:w-40 shrink-0 bg-slate-100 md:min-w-40 md:min-h-40 aspect-square md:aspect-auto">
-                  <img :data-code="producto.codigo" class="hidden object-contain w-full border rounded md:aspect-auto aspect-square md:w-40 md:h-40" src="" :alt="`${producto.codigo} imagen`"/>
+                  <img :data-code="producto.codigo" class="hidden object-contain w-full rounded border md:aspect-auto aspect-square md:w-40 md:h-40" src="" :alt="`${producto.codigo} imagen`"/>
                 </a>
-                <div class="flex flex-col w-full gap-2 grow">
+                <div class="flex flex-col gap-2 w-full grow">
                   <a :href="`/productos/${producto.id}/`">
-                    <div class="w-full px-4 py-2 text-lg italic font-extrabold text-center text-white bg-red-600 rounded-md md:w-60 font-helvetica" x-text="producto.codigo"></div>
+                    <div class="px-4 py-2 w-full text-lg italic font-extrabold text-center text-white bg-red-600 rounded-md md:w-60 font-helvetica" x-text="producto.codigo"></div>
                   </a>
                   <p class="font-semibold text-gray-500" x-text="producto.tipo"></p>
                   <p class="font-semibold text-gray-500 line-clamp-3" x-text="producto.aplicaciones"></p>

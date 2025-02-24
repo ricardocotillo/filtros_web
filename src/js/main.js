@@ -172,7 +172,7 @@ Alpine.data('brandData', () => ({
       this.years = { min, max }
       this.search()
     })
-    document.addEventListener('filter:models', ({ detail: { models } }) => {
+    document.addEventListener('filter:models', async ({ detail: { models } }) => {
       this.models = models
       this.search()
     })
