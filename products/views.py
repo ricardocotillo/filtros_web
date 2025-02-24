@@ -53,9 +53,9 @@ class ProductsView(View):
         ).order_by('ano')
         year_min = years.first()
         year_max = years.last()
-        lines = list(
-            Producto.objects.values_list('tipo', flat=True).distinct()
-        )
+        # lines = list(
+        #     Producto.objects.values_list('tipo', flat=True).distinct()
+        # )
         ctx = {
             'lines': [],
             'filters': filt.data,
@@ -126,19 +126,19 @@ class ProductoViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class MarcaViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Marca.objects.order_by('nombre')
+    queryset = Marca.objects.order_by('nombre').distinct()
     serializer_class = MarcaSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MarcaRestFilterSet
 
 
 class ModeloViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Modelo.objects.order_by('nombre')
+    queryset = Modelo.objects.order_by('nombre').distinct()
     serializer_class = ModeloSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ModeloRestFilterSet
 
 
 class ProductoModeloViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ProductoModelo.objects.order_by('id')
+    queryset = ProductoModelo.objects.order_by('id').distinct()
     serializer_class = ProductoModeloSerializer

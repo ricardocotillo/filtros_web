@@ -45,7 +45,7 @@ class ModeloRestFilterSet(RestFilterSet):
 
 class MarcaRestFilterSet(RestFilterSet):
     modelos__modelo_productos__ano__range = NumberRangeFilter(
-        field_name='modelos__modelo_productos_ano',
+        field_name='modelos__modelo_productos__ano',
         lookup_expr='range',
     )
     modelos__in = NumberInFilter(
