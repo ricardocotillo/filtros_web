@@ -38,7 +38,7 @@ class ModeloRestFilterSet(RestFilterSet):
         model = Modelo
         fields = {
             'nombre': ('iexact', 'icontains',),
-            'ano': ('exact', 'range',),
+            'modelo_productos__ano': ('exact', 'range',),
             'marca': ('exact', 'in'),
         }
 

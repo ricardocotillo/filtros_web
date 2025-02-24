@@ -158,6 +158,8 @@ Alpine.data('brandData', () => ({
   brands: [],
   selectedBrands: [],
   query: '',
+  years: null,
+  models: null,
   init() {
     const b = JSON.parse(document.querySelector('#brands').textContent)
     this.brands = b
@@ -165,18 +167,33 @@ Alpine.data('brandData', () => ({
     document.addEventListener('filter:clear', () => {
       this.selectedBrands = []
     })
+
+    document.addEventListener('filter:year', ({ detail: { min, max } }) => {
+      this.years = { min, max }
+      this.search()
+    })
+    document.addEventListener('filter:models', ({ detail: { models } }) => {
+      this.models = models
+      this.search()
+    })
   },
   dispatch() {
     const event = new CustomEvent('filter:brands', { detail: { brands: this.selectedBrands } })
     document.dispatchEvent(event)
   },
   async search() {
+    const params = {}
     if (this.query.length > 2) {
-      const res = await axios.get('/productos/marcas/', { params: { nombre__icontains: this.query } })
-      this.brands = res.data.results
-    } else {
-      this.brands = this.originalBrands
+      params['nombre__icontains'] = this.query
     }
+    if (this.years) {
+      params['modelos__modelo_productos__ano__range'] = `${this.years.min},${this.years.max}`
+    }
+    if (this.models) {
+      params['modelos__in'] = this.models.join(',')
+    }
+    const res = await axios.get('/productos/marcas/', { params })
+    this.brands = res.data.results
   }
 }))
 
@@ -186,6 +203,8 @@ Alpine.data('modelData', () => ({
   models: [],
   selectedModels: [],
   query: '',
+  years: null,
+  brands: null,
   init() {
     const m = JSON.parse(document.querySelector('#models').textContent)
     this.models = m
@@ -193,19 +212,33 @@ Alpine.data('modelData', () => ({
     document.addEventListener('filter:clear', () => {
       this.selectedModels = []
     })
+
+    document.addEventListener('filter:year', ({ detail: { min, max } }) => {
+      this.years = { min, max }
+      this.search()
+    })
+    document.addEventListener('filter:brands', ({ detail: { brands } }) => {
+      this.brands = brands
+      this.search()
+    })
   },
   dispatch() {
     const event = new CustomEvent('filter:models', { detail: { models: this.selectedModels } })
     document.dispatchEvent(event)
   },
   async search() {
+    const params = {}
     if (this.query.length > 2) {
-      const res = await axios.get('/productos/modelos/', { params: { nombre__icontains: this.query } })
-      console.log(res.data.results)
-      this.models = res.data.results
-    } else {
-      this.models = this.originalModels
+      params['nombre__icontains'] = this.query
     }
+    if (this.years) {
+      params['modelo_productos__ano__range'] = `${this.years.min},${this.years.max}`
+    }
+    if (this.brands) {
+      params['marca__in'] = this.brands.join(',')
+    }
+    const res = await axios.get('/productos/modelos/', { params })
+    this.models = res.data.results
   },
 }))
 
@@ -404,20 +437,20 @@ Alpine.data('contact', () => ({
   sent: false,
   success: false,
   sendEmail(e) {
-  const form = e.target;
-  const formData = new FormData(form);
-  axios.post(form.action, formData)
-  .then(response => {
-    console.log(response)
-    this.sent = true;
-    this.success = response.data.success;
-  })
-  .catch(error => {
-    console.log(error)
-    this.sent = true;
-    this.success = false;
-  })
-}
+    const form = e.target;
+    const formData = new FormData(form);
+    axios.post(form.action, formData)
+      .then(response => {
+        console.log(response)
+        this.sent = true;
+        this.success = response.data.success;
+      })
+      .catch(error => {
+        console.log(error)
+        this.sent = true;
+        this.success = false;
+      })
+  }
 }))
 Alpine.start()
 
