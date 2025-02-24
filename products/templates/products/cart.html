@@ -7,8 +7,45 @@
         <div class="md:col-span-1">
           <h4 class="mb-4 text-xl font-semibold">¿Deseas solicitar una cotización?</h4>
           <p class="mb-4 text-gray-900">Comunicate con nosotros. Enviaremos tu pedido a uno de nuestros representantes de venta y el te responderá lo más rápido posible</p>
-          {% comment %} <a :href="`https://wa.me/51970001095?text=${text}`" class="flex items-center justify-center gap-2 px-4 py-2 text-white bg-red-600"><i class="text-2xl lab la-whatsapp"></i> Solicitar cotización</a> {% endcomment %}
-          <a :href="`mailto:atencionalcliente@filtroswillybusch.com.pe?subject=${encodeURIComponent('Solicitud de cotización')}&body=${text}`" class="flex items-center justify-center gap-2 px-4 py-2 text-white bg-red-600"><i class="text-2xl las la-envelope"></i> Solicitar cotización <span x-text="totalFormatted"></span></a>
+          <template x-if="!showQuoteForm">
+              <button class="flex gap-2 justify-center items-center px-4 py-2 w-full text-white bg-red-600 hover:bg-red-700" @click="showQuoteForm = true">
+                <i class="text-2xl las la-envelope"></i> Solicitar cotización <span x-text="totalFormatted"></span>
+              </button>
+            </template>
+            <template x-if="showQuoteForm">
+              <button class="flex gap-2 justify-center items-center px-4 py-2 w-full text-white bg-red-600 hover:bg-red-700" @click="showQuoteForm = false">
+                <i class="text-2xl las la-times"></i> No solicitar por ahora
+              </button>
+            </template>
+          <form class="mt-4" x-show="showQuoteForm" @submit.prevent="requestQuote" action="{% url 'contact:email' %}">
+            <div>
+              <label class="block mb-2 text-sm font-semibold" for="first_name">Nombre (*)</label>
+              <input class="w-full rounded border-gray-300" type="text" name="first_name" id="first_name" required>
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-semibold" for="last_name">Apellido (*)</label>
+              <input class="w-full rounded border-gray-300" type="text" name="last_name" id="last_name" required>
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-semibold" for="email">Email (*)</label>
+              <input class="w-full rounded border-gray-300" type="email" name="email" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label class="block mb-2 text-sm font-semibold" for="phone">Teléfono (*)</label>
+              <input class="w-full rounded border-gray-300" type="tel" name="phone" id="phone" required>
+            </div>
+            <div class="flex justify-end">
+              <button class="flex gap-2 items-center px-4 py-2 text-white bg-red-600 hover:bg-red-700" type="submit">
+                Solicitar contización <i class="las la-paper-plane"></i>
+              </button>
+            </div>
+            <div x-cloak class="flex justify-center p-4 mt-4 bg-green-500" x-show="sent && success">
+              <p>Mensaje enviado correctamente</p>
+            </div>
+            <div x-cloak class="flex justify-center p-4 mt-4 bg-red-500" x-show="sent && !success">
+              <p>Error al enviar el mensaje. Por favor, intente nuevamente.</p>
+            </div>
+          </form>
         </div>
         <ul class="md:col-span-2">
           <template x-for="(item, i) in cart">
@@ -19,11 +56,11 @@
               <div class="flex flex-col gap-4">
                 <span x-text="item.code" class="text-2xl font-extrabold text-red-600"></span>
                 <p x-text="item.desc"></p>
-                <div class="flex flex-col items-start gap-2">
+                <div class="flex flex-col gap-2 items-start">
                   <div>
-                    <button @click="increase(item.code)" class="text-white bg-gray-500 rounded-l-lg w-11 h-11" type="button"><i class="las la-plus"></i></button>
-                    <input class="w-20 text-center border-l-0 border-r-0 border-gray-200 h-11" type="text" name="count" x-model.number="item.count" />
-                    <button :disabled="item.count <= 1" @click="decrease(item.code)" class="text-white bg-gray-500 rounded-r-lg w-11 h-11 disabled:bg-gray-200" type="button"><i class="las la-minus"></i></button>
+                    <button @click="increase(item.code)" class="w-11 h-11 text-white bg-gray-500 rounded-l-lg" type="button"><i class="las la-plus"></i></button>
+                    <input class="w-20 h-11 text-center border-r-0 border-l-0 border-gray-200" type="text" name="count" x-model.number="item.count" />
+                    <button :disabled="item.count <= 1" @click="decrease(item.code)" class="w-11 h-11 text-white bg-gray-500 rounded-r-lg disabled:bg-gray-200" type="button"><i class="las la-minus"></i></button>
                   </div>
                   <button @click="remove(item.code)" class="text-xs font-semibold text-gray-500">REMOVE</button>
                 </div>

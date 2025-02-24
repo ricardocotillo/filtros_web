@@ -249,6 +249,9 @@ Alpine.data('modelData', () => ({
 Alpine.data('fullCartData', () => ({
   cart: null,
   text: '',
+  showQuoteForm: false,
+  sent: false,
+  success: false,
   init() {
     this.$watch('cart', v => {
       this.encodeCart()
