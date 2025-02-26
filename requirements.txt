@@ -1,5 +1,5 @@
 Django>=4.2,<5.1
-wagtail>=6.3,<6.4
+wagtail>=6.4,<6.5
 django-filter>=24.3
 django-vite>=3.0.5
 whitenoise>=6.8.2
