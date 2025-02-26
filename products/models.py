@@ -16,7 +16,7 @@ class Marca(models.Model):
 
 @register_snippet
 class Modelo(models.Model):
-    nombre = models.CharField(max_length=25, unique=True)
+    nombre = models.CharField(max_length=50, unique=True)
     marca = models.ForeignKey(
         Marca,
         on_delete=models.CASCADE,
