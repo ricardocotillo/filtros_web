@@ -267,6 +267,10 @@ Alpine.data('fullCartData', () => ({
   get totalFormatted() {
     return `(${this.total} items)`
   },
+  get totalItems() {
+    const num = Object.keys(this.cart).length
+    return `(${num} item${num > 1 ? 's' : ''})`
+  },
   async requestQuote(e) {
     const form = e.target
     const formData = new FormData(form)

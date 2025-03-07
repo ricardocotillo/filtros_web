@@ -9,7 +9,7 @@
           <p class="mb-4 text-gray-900">Comunicate con nosotros. Enviaremos tu pedido a uno de nuestros representantes de venta y el te responderá lo más rápido posible</p>
           <template x-if="!showQuoteForm">
               <button class="flex gap-2 justify-center items-center px-4 py-2 w-full text-white bg-red-600 hover:bg-red-700" @click="showQuoteForm = true">
-                <i class="text-2xl las la-envelope"></i> Solicitar cotización <span x-text="totalFormatted"></span>
+                <i class="text-2xl las la-envelope"></i> Solicitar cotización <span x-text="totalItems"></span>
               </button>
             </template>
             <template x-if="showQuoteForm">
