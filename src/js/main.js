@@ -322,6 +322,10 @@ Alpine.data('cart', () => ({
       this.total = this.getTotal()
     }
   },
+  get totalItems() {
+    const num = Object.keys(this.cart).length
+    return num
+  },
   update(e) {
     const code = e.detail.code
     const desc = e.detail.desc
@@ -329,21 +333,15 @@ Alpine.data('cart', () => ({
       this.cart[code] = { code, count: 0, desc, }
     }
     this.cart[code].count += e.detail.count
-    this.total = this.getTotal()
     const cartStorage = JSON.stringify(this.cart)
     localStorage.setItem('cart', cartStorage)
   },
   remove(e) {
     const code = e.detail.code
     delete this.cart[code]
-    this.total = this.getTotal()
     const cartStorage = JSON.stringify(this.cart)
     localStorage.setItem('cart', cartStorage)
   },
-  getTotal() {
-    if (!this.cart || !Object.keys(this.cart).length) return 0
-    return Object.values(this.cart).map(item => item.count).reduce((a, v) => a + v)
-  }
 }))
 
 Alpine.data('product', () => ({
