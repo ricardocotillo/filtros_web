@@ -61,7 +61,8 @@ class EmailView(View):
                     html_message=html_msg,
                     from_email='atencionalcliente@filtroswillybusch.com.pe',
                     recipient_list=[
-                        'atencionalcliente@filtroswillybusch.com.pe'],
+                        'atencionalcliente@filtroswillybusch.com.pe'
+                    ],
                     fail_silently=False,
                 )
             except Exception as e:
@@ -69,5 +70,4 @@ class EmailView(View):
 
             return JsonResponse({'success': True})
         else:
-            print(form.errors.as_json())
             return JsonResponse({'success': False, 'errors': form.errors})
