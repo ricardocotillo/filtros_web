@@ -30,7 +30,10 @@ class QuoteView(View):
                     message=html_msg,
                     html_message=html_msg,
                     from_email='atencionalcliente@filtroswillybusch.com.pe',
-                    recipient_list=[email],
+                    recipient_list=[
+                        email,
+                        'atencionalcliente@filtroswillybusch.com.pe',
+                    ],
                 )
                 return JsonResponse({'success': True})
             except Exception as e:
