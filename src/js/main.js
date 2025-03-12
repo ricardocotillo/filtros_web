@@ -466,6 +466,7 @@ Alpine.data('contact', () => ({
       .then(response => {
         this.sent = true;
         this.success = response.data.success;
+        form.reset()
       })
       .catch(error => {
         this.sent = true;
