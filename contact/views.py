@@ -50,12 +50,14 @@ class EmailView(View):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
+            message = form.cleaned_data['message']
 
             html_msg = render_to_string('contact/email.html', {
                 'first_name': first_name,
                 'last_name': last_name,
                 'email': email,
-                'phone': phone
+                'phone': phone,
+                'message': message,
             })
             try:
                 send_mail(
