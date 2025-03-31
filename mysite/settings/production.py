@@ -1,10 +1,10 @@
 import environ
-from .base import *
+from .base import *  # noqa
 
 DEBUG = False
 
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))  # noqa
 
 SECRET_KEY = env('SECRET_KEY')
 
@@ -29,6 +29,6 @@ EMAIL_USE_SSL = True
 EMAIL_PORT = 465
 
 try:
-    from .local import *
+    from .local import *  # noqa
 except ImportError:
     pass
