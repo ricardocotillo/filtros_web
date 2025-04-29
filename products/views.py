@@ -53,9 +53,6 @@ class ProductsView(View):
         ).order_by('ano')
         year_min = years.first()
         year_max = years.last()
-        # lines = list(
-        #     Producto.objects.values_list('tipo', flat=True).distinct()
-        # )
         ctx = {
             'lines': [],
             'filters': filt.data,
