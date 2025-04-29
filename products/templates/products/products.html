@@ -45,21 +45,6 @@
               <div x-ref="range"></div>
             </div>
           </div>
-          {% comment %} <div x-data="lineData" class="border-t border-gray-400 border-x">
-            <button @click="open = !open" class="flex justify-between items-center px-4 py-2 w-full text-lg font-semibold">Línea <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
-            <div x-show="open" x-transition class="pt-2 bg-white">
-              <ul class="flex flex-col gap-2 px-4 pt-2 pb-6">
-                <template x-for="line in lines">
-                  <li>
-                    <label class="flex gap-2 items-center w-full" :for="line">
-                      <input class="rounded" :id="line" @change="dispatch" type="checkbox" :value="line" x-model="selectedLines">
-                      <span x-text="line"></span>
-                    </label>
-                  </li>
-                </template>
-              </ul>
-            </div>
-          </div> {% endcomment %}
           <div x-data="brandData" class="border-t border-gray-400 border-x">
             <button @click="open = !open" class="flex justify-between items-center px-4 py-2 w-full text-lg font-semibold">Marca <i class="las" :class="open ? 'la-angle-up' : 'la-angle-down'"></i></button>
             <div x-show="open" x-transition class="pt-2 bg-white">
